@@ -1,0 +1,407 @@
+// ODD_EVE GAME:
+
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int RANDOM(int n)
+{
+    srand(time(NULL));
+    return rand() % n;
+}
+int main()
+{
+    int CPU_TOSS1, CPU_TOSS4[120], TOSS, SUM1 = 0, SUM2 = 0, SUM3 = 0, SUM4 = 0, SUM5 = 0, SUM6 = 0, SUM7 = 0, ANS, CPU_TOSS2, CPU_TOSS3[120], G1[120], G2[120], j;
+    char CHOOSE, E, O, CHOose[] = {'B', 'b'}, CPU_CHOICE, READY;
+    char XFACTOR;
+
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("                                                                                 (R)      \n");
+    printf("               *       *  *     *  *        * * * *  *       *  * * * *                   \n");
+    printf("           *       *   *    *   *    *      *         *     *   *                         \n");
+    printf("          *         *  *     *  *     *     * * * *    *   *    * * * *                   \n");
+    printf("           *       *   *    *   *    *      *           * *     *                         \n");
+    printf("               *       *  *     *  *        * * * *      *      * * * *   G A M E .       \n");
+    printf("           -------------------------------------------------------------------------                                                                                  ");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("PLAYER : CHOOSE (O) ODD OR (E) EVE : ");
+    scanf("%c", &CHOOSE);
+    printf("\n");
+    printf("YOU HAVE CHOOSEN %c\n", CHOOSE);
+    if (CHOOSE == 'O')
+    {
+        printf("CPU GETS E\n");
+    }
+    else
+    {
+        printf("CPU GETS O\n");
+    }
+    printf("\n");
+    printf("TOSS TIME\n");
+    printf("\n");
+
+    printf("CHOOSE BETWEEN 1 & 10 : ", TOSS);
+    scanf("%d", &TOSS);
+    printf("\n");
+    printf("PLAYER : %d\n", TOSS);
+    CPU_TOSS1 = RANDOM(10) + 1;
+    printf("CPU : %d\n", CPU_TOSS1);
+    printf("\n");
+    SUM1 = CPU_TOSS1 + TOSS;
+    if (SUM1 % 2 == 0)
+    {
+        printf("THAT'S EVE\n");
+        ANS = 'E';
+    }
+    else
+    {
+        printf("THAT'S ODD\n");
+        ANS = 'O';
+    }
+    if (CHOOSE == ANS)
+    {
+        printf("YOU HAVE WON THE TOSS\n");
+    }
+    else
+    {
+        printf("CPU HAS WON THE TOSS\n");
+    }
+    printf("\n");
+    printf("CHOOSE (B) BATTING OR (b) BOWLING : ");
+    if (CHOOSE == ANS)
+    {
+        scanf(" %c", &XFACTOR);
+        printf("YOU HAVE CHOOSEN : %c\n", XFACTOR);
+    }
+    else
+    {
+        CPU_TOSS2 = RANDOM(2);
+        CPU_CHOICE = CHOose[CPU_TOSS2];
+        printf("CPU HAS CHOOSEN : %c\n", CPU_CHOICE);
+    }
+    printf("\n");
+    printf("\n");
+    printf("                     FORMAT : YOU HAVE 120 BALLS TO BOWL AND 1 WICKET TO BAT");
+    printf("\n");
+    printf("\n");
+    printf("                                         LET'S BEGIN\n");
+    printf("                                        FIRST INNINGS");
+    printf("\n");
+    printf("\n");
+    for (int i = 0; i < 120; i++)
+    {
+        printf("BALL %d     PLAYER : ", i + 1);
+        scanf("%d", &G1[i]);
+        CPU_TOSS4[i] = RANDOM(10) + 1;
+        printf("BALL %d     CPU : %d\n", i + 1, CPU_TOSS4[i]);
+        printf("\n");
+        if (G1[i] == CPU_TOSS4[i])
+        {
+            printf("\n");
+            printf("OUT\n");
+            break;
+        }
+        SUM2 = SUM2 + G1[i];
+        SUM3 = SUM3 + CPU_TOSS4[i];
+        if (CPU_CHOICE == 'B')
+        {
+            printf("SCORE(CPU) = %d\n", SUM3);
+            printf("\n");
+        }
+        else if (CPU_CHOICE == 'b')
+        {
+            printf("SCORE(PLAYER) = %d\n", SUM2);
+            printf("\n");
+        }
+        else if (XFACTOR == 'B')
+        {
+            printf("SCORE(PLAYER) = %d\n", SUM2);
+            printf("\n");
+        }
+        else
+        {
+            printf("SCORE(CPU) = %d\n", SUM3);
+            printf("\n");
+        }
+    }
+    printf("\n");
+    if (CPU_CHOICE == 'B')
+    {
+        printf("TARGET = %d ", SUM3 + 1);
+    }
+    else if (CPU_CHOICE == 'b')
+    {
+        printf("TARGET = %d ", SUM2 + 1);
+    }
+    else if (XFACTOR == 'B')
+    {
+        printf("TARGET = %d ", SUM2 + 1);
+    }
+    else
+    {
+        printf("TARGET = %d ", SUM3 + 1);
+    }
+    printf("\n");
+    printf("\n");
+    printf("                                         LET'S BEGIN\n");
+    printf("                                       SECOND  INNINGS");
+    printf("\n");
+    printf("\n");
+    for (j = 0; j < 120; j++)
+    {
+        printf("BALL %d     PLAYER : ", j + 1);
+        scanf(" %d", &G2[j]);
+        CPU_TOSS3[j] = RANDOM(10) + 1;
+        printf("BALL %d     CPU : %d\n", j + 1, CPU_TOSS3[j]);
+
+        SUM4 = SUM4 + G2[j];
+        SUM5 = SUM5 + CPU_TOSS3[j];
+        printf("\n");
+        if (G2[j] == CPU_TOSS3[j] && CPU_CHOICE == 'B' && SUM3 > SUM4)
+        {
+            SUM6 = SUM4 - G2[j];
+            printf("\n");
+            printf("OUT\n");
+            printf("CPU WON BY %d RUNS", SUM3 + 1 - SUM6);
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * *    *       *                    \n");
+            printf("       *      *    *     *   *                      \n");
+            printf("       *      * * *        *                        \n");
+            printf("       *      *    *       *                        \n");
+            printf("       *      *     *      *     A G A I N          \n");
+            printf("\n");
+            break;
+        }
+        else if (G2[j] == CPU_TOSS3[j] && CPU_CHOICE == 'b' && SUM5 < SUM2)
+        {
+            SUM7 = SUM5 - CPU_TOSS3[j];
+            printf("\n");
+            printf("OUT\n");
+            printf("YOU WON BY %d RUNS", SUM2 + 1 - SUM7);
+            printf("\n");
+            printf("\n");
+            printf("  *             *  * * * *  *        *                \n");
+            printf("   *     *     *   *        *        *                \n");
+            printf("    *   * *   *    * * * *  *        *                \n");
+            printf("     * *   * *     *        *        *                \n");
+            printf("      *     *      * * * *  * * * *  * * * *  D O N E \n");
+            printf("\n");
+            break;
+        }
+        else if (G2[j] == CPU_TOSS3[j] && XFACTOR == 'B' && SUM5 < SUM2)
+        {
+            SUM7 = SUM5 - CPU_TOSS3[j];
+            printf("\n");
+            printf("OUT\n");
+            printf("YOU WON BY %d RUNS", SUM2 + 1 - SUM7);
+            printf("\n");
+            printf("\n");
+            printf("  *             *  * * * *  *        *                \n");
+            printf("   *     *     *   *        *        *                \n");
+            printf("    *   * *   *    * * * *  *        *                \n");
+            printf("     * *   * *     *        *        *                \n");
+            printf("      *     *      * * * *  * * * *  * * * *  D O N E \n");
+            printf("\n");
+            break;
+        }
+        else if (G2[j] == CPU_TOSS3[j] && XFACTOR == 'b' && SUM3 > SUM4)
+        {
+            SUM6 = SUM4 - G2[j];
+            printf("\n");
+            printf("OUT\n");
+            printf("CPU WON BY %d RUNS", SUM3 + 1 - SUM6);
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * *    *       *                    \n");
+            printf("       *      *    *     *   *                      \n");
+            printf("       *      * * *        *                        \n");
+            printf("       *      *    *       *                        \n");
+            printf("       *      *     *      *     A G A I N          \n");
+            printf("\n");
+            break;
+        }
+        else if (CPU_CHOICE == 'B' && SUM3 < SUM4)
+        {
+            printf("YOU WON");
+            printf("\n");
+            printf("\n");
+            printf("  *             *  * * * *  *        *                \n");
+            printf("   *     *     *   *        *        *                \n");
+            printf("    *   * *   *    * * * *  *        *                \n");
+            printf("     * *   * *     *        *        *                \n");
+            printf("      *     *      * * * *  * * * *  * * * *  D O N E \n");
+            printf("\n");
+            break;
+        }
+        else if (CPU_CHOICE == 'b' && SUM5 > SUM2)
+        {
+            printf("CPU WON");
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * *    *       *                    \n");
+            printf("       *      *    *     *   *                      \n");
+            printf("       *      * * *        *                        \n");
+            printf("       *      *    *       *                        \n");
+            printf("       *      *     *      *     A G A I N          \n");
+            printf("\n");
+            break;
+        }
+        else if (XFACTOR == 'B' && SUM5 > SUM2)
+        {
+            printf("CPU WON");
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * *    *       *                    \n");
+            printf("       *      *    *     *   *                      \n");
+            printf("       *      * * *        *                        \n");
+            printf("       *      *    *       *                        \n");
+            printf("       *      *     *      *     A G A I N          \n");
+            printf("\n");
+            break;
+        }
+        else if (XFACTOR == 'b' && SUM3 < SUM4)
+        {
+            printf("YOU WON");
+            printf("\n");
+            printf("\n");
+            printf("  *             *  * * * *  *        *                \n");
+            printf("   *     *     *   *        *        *                \n");
+            printf("    *   * *   *    * * * *  *        *                \n");
+            printf("     * *   * *     *        *        *                \n");
+            printf("      *     *      * * * *  * * * *  * * * *  D O N E \n");
+            printf("\n");
+            break;
+        }
+        else if (CPU_CHOICE == 'B')
+        {
+            printf("SCORE(PLAYER) = %d\n", SUM4);
+            printf("RUNS REQUIRED = %d\n", SUM3 + 1 - SUM4);
+            printf("\n");
+        }
+        else if (CPU_CHOICE == 'b')
+        {
+            printf("SCORE(CPU) = %d\n", SUM5);
+            printf("RUNS REQUIRED = %d\n", SUM2 + 1 - SUM5);
+            printf("\n");
+        }
+        else if (XFACTOR == 'B')
+        {
+            printf("SCORE(CPU) = %d\n", SUM5);
+            printf("RUNS REQUIRED = %d\n", SUM2 + 1 - SUM5);
+            printf("\n");
+        }
+        else if (XFACTOR == 'b')
+        {
+            printf("SCORE(PLAYER) = %d\n", SUM4);
+            printf("RUNS REQUIRED = %d\n", SUM3 + 1 - SUM4);
+            printf("\n");
+        }
+        else if (G2[j] == CPU_TOSS3[j] && CPU_CHOICE == 'B' && (SUM2 + 1 - SUM5) == 1)
+        {
+            printf("\n");
+            printf("OUT");
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * * * *  * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *          *      * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *      * * * * *  * * * *  GAME OVER   \n");
+            printf("\n");
+            break;
+        }
+        else if (G2[j] == CPU_TOSS3[j] && XFACTOR == 'B' && (SUM2 + 1 - SUM5) == 1)
+        {
+            printf("\n");
+            printf("OUT");
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * * * *  * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *          *      * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *      * * * * *  * * * *  GAME OVER   \n");
+            printf("\n");
+            break;
+        }
+        else if (G2[j] == CPU_TOSS3[j] && XFACTOR == 'b' && (SUM2 + 1 - SUM5) == 1)
+        {
+            printf("\n");
+            printf("OUT");
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * * * *  * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *          *      * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *      * * * * *  * * * *  GAME OVER   \n");
+            printf("\n");
+            break;
+        }
+        else if (G2[j] == CPU_TOSS3[j] && CPU_CHOICE == 'b' && (SUM2 + 1 - SUM5) == 1)
+        {
+            printf("\n");
+            printf("OUT");
+            printf("\n");
+            printf("\n");
+            printf("   * * * * *  * * * * *  * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *          *      * * * *              \n");
+            printf("       *          *      *                    \n");
+            printf("       *      * * * * *  * * * *  GAME OVER   \n");
+            printf("\n");
+            break;
+        }
+    }
+    if (CPU_CHOICE == 'B' && SUM3 == SUM4)
+    {
+        printf("\n");
+        printf("\n");
+        printf("   * * * * *  * * * * *  * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *          *      * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *      * * * * *  * * * *  GAME OVER   \n");
+        printf("\n");
+    }
+    else if (XFACTOR == 'B' && SUM2 == SUM5)
+    {
+        printf("\n");
+        printf("\n");
+        printf("   * * * * *  * * * * *  * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *          *      * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *      * * * * *  * * * *  GAME OVER   \n");
+        printf("\n");
+    }
+    else if (XFACTOR == 'b' && SUM4 == SUM3)
+    {
+        printf("\n");
+        printf("\n");
+        printf("   * * * * *  * * * * *  * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *          *      * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *      * * * * *  * * * *  GAME OVER   \n");
+        printf("\n");
+    }
+    else if (CPU_CHOICE == 'b' && SUM5 == SUM2)
+    {
+        printf("\n");
+        printf("\n");
+        printf("   * * * * *  * * * * *  * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *          *      * * * *              \n");
+        printf("       *          *      *                    \n");
+        printf("       *      * * * * *  * * * *  GAME OVER   \n");
+        printf("\n");
+    }
+    getch();
+}

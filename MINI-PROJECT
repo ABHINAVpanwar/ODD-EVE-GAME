@@ -1,7 +1,7 @@
 // ODD_EVE GAME:
 
 #include <stdio.h>
-#include <conio.h>
+// #include <conio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -403,5 +403,5 @@ int main()
         printf("       *      * * * * *  * * * *  GAME OVER   \n");
         printf("\n");
     }
-    getch();
+    // getch();
 }
